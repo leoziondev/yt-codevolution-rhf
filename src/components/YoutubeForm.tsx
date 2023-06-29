@@ -26,7 +26,8 @@ const YoutubehtmlForm = () => {
         watch,
         getValues,
         setValue,
-        formState: { errors, touchedFields, dirtyFields, isDirty }
+        // formState: { errors, touchedFields, dirtyFields, isDirty }
+        formState: { errors }
     } = useForm<FormValues>({
         defaultValues: {
             username: "Jhon Doe",
@@ -43,7 +44,7 @@ const YoutubehtmlForm = () => {
         }
     })
 
-    console.log({ touchedFields, dirtyFields, isDirty })
+    // console.log({ touchedFields, dirtyFields, isDirty })
 
     const { fields, append, remove } = useFieldArray({
         name: 'phNumbers',
@@ -157,12 +158,11 @@ const YoutubehtmlForm = () => {
                             type="text"
                             id="twitter"
                             {...register("social.twitter", {                                
-                                required: {
-                                    value: true,
-                                    message: "Twitter is required"
-                                }
+                                // disabled: true,
+                                disabled: watch("channel") === "",
+                                required: "Enter twitter profile"
                             })}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2 disabled:cursor-not-allowed" />
                             <p className="text-red-500 text-sm italic">{errors.social?.twitter?.message}</p>
                     </div>
                 </div>
