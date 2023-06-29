@@ -27,6 +27,7 @@ const YoutubehtmlForm = () => {
         getValues,
         setValue,
         reset,
+        trigger,
         formState: {
             errors,
             touchedFields,
@@ -338,6 +339,13 @@ const YoutubehtmlForm = () => {
                         className="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4"
                     >
                         Set Value
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => trigger("channel")}
+                        className="flex w-full justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4"
+                    >
+                        Validation Trigger
                     </button>
                 </div>
             </form>
