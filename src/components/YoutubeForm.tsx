@@ -25,6 +25,7 @@ const YoutubehtmlForm = () => {
         handleSubmit,
         watch,
         getValues,
+        setValue,
         formState: { errors }
     } = useForm<FormValues>({
         defaultValues: {
@@ -55,6 +56,14 @@ const YoutubehtmlForm = () => {
     const handleGetValues = () => {
         // console.log("Get values: ", getValues("social"))
         console.log("Get values: ", getValues(["username","email", "social"]))
+    }
+
+    const handleSetValue = () => {
+        setValue("username", "", {
+            shouldValidate: true,
+            shouldDirty: true,
+            shouldTouch: true
+        })
     }
 
     // const watchUsername = watch('username')
@@ -279,9 +288,16 @@ const YoutubehtmlForm = () => {
                         type="button"
                         onClick={handleGetValues}
                         className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4"
-                        >
-                            Get Values
-                        </button>
+                    >
+                        Get Values
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleSetValue}
+                        className="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4"
+                    >
+                        Set Value
+                    </button>
                 </div>
             </form>
         </div>
