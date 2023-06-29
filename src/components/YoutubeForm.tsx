@@ -9,6 +9,7 @@ type FormValues = {
         twitter: string
         facebook: string
     }
+    phoneNumbers: string[]
 }
 
 const YoutubehtmlForm = () => {
@@ -25,12 +26,14 @@ const YoutubehtmlForm = () => {
             social: {
                 twitter: "",
                 facebook: ""
-            }
+            },
+            phoneNumbers: ["", ""]
         }
     })
 
     const onSubmit = (data: FormValues) => {
         console.log("Form Submited: ", data)
+        
     }
 
   return (
@@ -110,8 +113,14 @@ const YoutubehtmlForm = () => {
                         <input
                             type="text"
                             id="twitter"
-                            {...register("social.twitter")}
+                            {...register("social.twitter", {
+                                required: {
+                                    value: true,
+                                    message: "Twitter is required"
+                                }
+                            })}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
+                            <p className="text-red-500 text-sm italic">{errors.social?.twitter?.message}</p>
                     </div>
                 </div>
 
@@ -121,8 +130,48 @@ const YoutubehtmlForm = () => {
                         <input
                             type="text"
                             id="facebook"
-                            {...register("social.facebook")}
+                            {...register("social.facebook", {
+                                required: {
+                                    value: true,
+                                    message: "Facebook is required"
+                                }
+                            })}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
+                            <p className="text-red-500 text-sm italic">{errors.social?.facebook?.message}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label htmlFor="WhatsApp" className="block text-sm font-medium leading-6 text-gray-900">WhatsApp</label>
+                    <div className="mt-2">
+                        <input
+                            type="text"
+                            id="WhatsApp"
+                            {...register("phoneNumbers.0", {
+                                required: {
+                                    value: true,
+                                    message: "Enter whatsapp number"
+                                }
+                            })}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
+                            <p className="text-red-500 text-sm italic">{errors.phoneNumbers?.[0]?.message}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label htmlFor="comercialPhone" className="block text-sm font-medium leading-6 text-gray-900">Comercial Phone</label>
+                    <div className="mt-2">
+                        <input
+                            type="text"
+                            id="comercialPhone"
+                            {...register("phoneNumbers.1", {
+                                required: {
+                                    value: true,
+                                    message: "Enter comercial phone contact"
+                                }
+                            })}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
+                            <p className="text-red-500 text-sm italic">{errors.phoneNumbers?.[1]?.message}</p>
                     </div>
                 </div>
 
