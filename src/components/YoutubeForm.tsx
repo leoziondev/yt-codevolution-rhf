@@ -54,6 +54,18 @@ const YoutubehtmlForm = () => {
                                 pattern: {
                                     value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                                     message: "Invalid email format"
+                                },
+                                validate: {
+                                    notAdmin: (fieldValue) => {
+                                        return (
+                                            fieldValue !== "admin@example.com" ||
+                                            "Enter a different email address"
+                                        )
+                                    },
+                                    notBlackListed: (fieldValue) => {
+                                        return !fieldValue.endsWith("baddomain.com") ||
+                                        "This domain is not supported"
+                                    }
                                 }
                             })}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
