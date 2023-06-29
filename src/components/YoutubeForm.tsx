@@ -1,8 +1,18 @@
 import { useForm } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
 
+type FormValues = {
+    username: string
+    email: string
+    channel: string
+}
+
 const YoutubehtmlForm = () => {
-    const { register, control } = useForm()
+    const { register, control, handleSubmit } = useForm<FormValues>()
+
+    const onSubmit = (data: FormValues) => {
+        console.log("Form Submited: ", data)
+    }
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -11,7 +21,7 @@ const YoutubehtmlForm = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div>
                     <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Username</label>
                     <div className="mt-2">
