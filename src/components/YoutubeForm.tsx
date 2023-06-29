@@ -145,6 +145,12 @@ const YoutubehtmlForm = () => {
                                     notBlackListed: (fieldValue) => {
                                         return !fieldValue.endsWith("baddomain.com") ||
                                         "This domain is not supported"
+                                    },
+                                    emailAvailable: async (fieldValue) => {
+                                        const res = await fetch(`https://jsonplaceholder.typicode.com/users?email=${fieldValue}`)
+                                        const data = await res.json()
+
+                                        return data.length == 0 || "Email already exists"
                                     }
                                 }
                             })}
@@ -314,7 +320,7 @@ const YoutubehtmlForm = () => {
                     <button
                         type="submit"
                         className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed mt-4"
-                        disabled={!isDirty || !isValid || isSubmitting}
+                        disabled={!isDirty ||  isSubmitting}
                     >
                         Create
                     </button>
