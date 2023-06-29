@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { useForm, useFieldArray } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
 
 type FormValues = {
@@ -10,6 +10,9 @@ type FormValues = {
         facebook: string
     }
     phoneNumbers: string[]
+    phNumbers: {
+        number: string
+    }[]
 }
 
 const YoutubehtmlForm = () => {
@@ -27,8 +30,14 @@ const YoutubehtmlForm = () => {
                 twitter: "",
                 facebook: ""
             },
-            phoneNumbers: ["", ""]
+            phoneNumbers: ["", ""],
+            phNumbers: [{ number: '' }]
         }
+    })
+
+    const { fields, append, remove } = useFieldArray({
+        name: 'phNumbers',
+        control
     })
 
     const onSubmit = (data: FormValues) => {
@@ -173,6 +182,37 @@ const YoutubehtmlForm = () => {
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
                             <p className="text-red-500 text-sm italic">{errors.phoneNumbers?.[1]?.message}</p>
                     </div>
+                </div>
+
+                <div>
+                    <label>List of phone numbers</label>
+                    {fields.map((field, index) => {
+                        return (
+                            <div className="flex gap-2 mt-2" key={field.id}>
+                                <input
+                                    type="text"
+                                    {...register(`phNumbers.${index}.number` as const)}
+                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2"
+                                />
+                                {index > 0 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => remove(index)}
+                                        className="bg-red-500 py-1 px-2 rounded-md text-white"
+                                    >
+                                        Remove
+                                    </button>
+                                )}
+                            </div>
+                        )
+                    })}
+                    <button
+                        type="button"
+                        onClick={() => append({ number: "" })}
+                        className="mt-2 bg-indigo-500 py-1 px-2 rounded-md text-white"
+                    >
+                        Add +
+                    </button>
                 </div>
 
                 <div>
