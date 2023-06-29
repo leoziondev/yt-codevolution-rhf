@@ -26,7 +26,7 @@ const YoutubehtmlForm = () => {
         watch,
         getValues,
         setValue,
-        formState: { errors }
+        formState: { errors, touchedFields, dirtyFields, isDirty }
     } = useForm<FormValues>({
         defaultValues: {
             username: "Jhon Doe",
@@ -42,6 +42,8 @@ const YoutubehtmlForm = () => {
             dob: new Date()
         }
     })
+
+    console.log({ touchedFields, dirtyFields, isDirty })
 
     const { fields, append, remove } = useFieldArray({
         name: 'phNumbers',
