@@ -26,8 +26,7 @@ const YoutubehtmlForm = () => {
         watch,
         getValues,
         setValue,
-        // formState: { errors, touchedFields, dirtyFields, isDirty }
-        formState: { errors }
+        formState: { errors, touchedFields, dirtyFields, isDirty, isValid }
     } = useForm<FormValues>({
         defaultValues: {
             username: "Jhon Doe",
@@ -44,7 +43,7 @@ const YoutubehtmlForm = () => {
         }
     })
 
-    // console.log({ touchedFields, dirtyFields, isDirty })
+    // console.log({ touchedFields, dirtyFields, isDirty, isValid })
 
     const { fields, append, remove } = useFieldArray({
         name: 'phNumbers',
@@ -289,10 +288,16 @@ const YoutubehtmlForm = () => {
                 </div>
 
                 <div>
-                    <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create</button>
+                    <button
+                        type="submit"
+                        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed"
+                        disabled={!isDirty || !isValid}
+                    >
+                        Create
+                    </button>
                     <button
                         type="button"
-                        onClick={handleGetValues}
+                        onClick={handleGetValues}                        
                         className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4"
                     >
                         Get Values
