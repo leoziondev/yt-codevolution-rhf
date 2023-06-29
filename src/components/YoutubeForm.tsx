@@ -5,6 +5,10 @@ type FormValues = {
     username: string
     email: string
     channel: string
+    social: {
+        twitter: string
+        facebook: string
+    }
 }
 
 const YoutubehtmlForm = () => {
@@ -14,14 +18,13 @@ const YoutubehtmlForm = () => {
         handleSubmit,
         formState: { errors }
     } = useForm<FormValues>({
-        defaultValues: async () => {
-            const res = await fetch("https://jsonplaceholder.typicode.com/users/1")
-            const data = await res.json()
-
-            return {
-                username: "Jhon Doe",
-                email: data.email,
-                channel: "",
+        defaultValues: {
+            username: "Jhon Doe",
+            email: "",
+            channel: "",
+            social: {
+                twitter: "",
+                facebook: ""
             }
         }
     })
@@ -98,6 +101,28 @@ const YoutubehtmlForm = () => {
                             })}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
                             <p className="text-red-500 text-sm italic">{errors.channel?.message}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label htmlFor="twitter" className="block text-sm font-medium leading-6 text-gray-900">Twitter</label>
+                    <div className="mt-2">
+                        <input
+                            type="text"
+                            id="twitter"
+                            {...register("social.twitter")}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
+                    </div>
+                </div>
+
+                <div>
+                    <label htmlFor="facebook" className="block text-sm font-medium leading-6 text-gray-900">Facebook</label>
+                    <div className="mt-2">
+                        <input
+                            type="text"
+                            id="facebook"
+                            {...register("social.facebook")}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
                     </div>
                 </div>
 
