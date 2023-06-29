@@ -51,7 +51,8 @@ const YoutubehtmlForm = () => {
             phNumbers: [{ number: '' }],
             age: 0,
             dob: new Date()
-        }
+        },
+        mode: "onTouched"
     })
 
     // console.log({ touchedFields, dirtyFields, isDirty, isValid })
