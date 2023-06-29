@@ -1,5 +1,6 @@
 import { useForm, useFieldArray } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
+import { useEffect } from 'react'
 
 type FormValues = {
     username: string
@@ -22,6 +23,7 @@ const YoutubehtmlForm = () => {
         register,
         control,
         handleSubmit,
+        watch,
         formState: { errors }
     } = useForm<FormValues>({
         defaultValues: {
@@ -48,6 +50,17 @@ const YoutubehtmlForm = () => {
         console.log("Form Submited: ", data)
         
     }
+
+    // const watchUsername = watch('username')
+    // const watchForm = watch()
+    // console.log(watchForm)
+
+    useEffect(() => {
+        const subscription = watch((value) => {
+            console.log(value)
+        })
+        return () => subscription.unsubscribe()
+    }, [watch])
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
