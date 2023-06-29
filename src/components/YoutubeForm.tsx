@@ -1,4 +1,4 @@
-import { useForm, useFieldArray } from 'react-hook-form'
+import { useForm, useFieldArray, FieldErrors } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
 import { useEffect } from 'react'
 
@@ -56,6 +56,10 @@ const YoutubehtmlForm = () => {
         
     }
 
+    const onError = (errors: FieldErrors<FormValues>) => {
+        console.log("Form Errors: ", errors)
+    }
+
     const handleGetValues = () => {
         // console.log("Get values: ", getValues("social"))
         console.log("Get values: ", getValues(["username","email", "social"]))
@@ -87,7 +91,7 @@ const YoutubehtmlForm = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+            <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-6" noValidate>
                 <div>
                     <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Username</label>
                     <div className="mt-2">
