@@ -26,6 +26,7 @@ const YoutubehtmlForm = () => {
         watch,
         getValues,
         setValue,
+        reset,
         formState: {
             errors,
             touchedFields,
@@ -82,6 +83,10 @@ const YoutubehtmlForm = () => {
             shouldTouch: true
         })
     }
+
+    useEffect(() => {
+        if (isSubmitSuccessful) reset()
+    }, [isSubmitSuccessful, reset])
 
     // const watchUsername = watch('username')
     // const watchForm = watch()
@@ -300,8 +305,15 @@ const YoutubehtmlForm = () => {
 
                 <div>
                     <button
+                        type="button"
+                        onClick={() => reset()}
+                        className="flex w-full justify-center rounded-md bg-slate-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed"                   
+                    >
+                        Reset
+                    </button>
+                    <button
                         type="submit"
-                        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed"
+                        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed mt-4"
                         disabled={!isDirty || !isValid || isSubmitting}
                     >
                         Create
