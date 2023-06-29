@@ -14,10 +14,15 @@ const YoutubehtmlForm = () => {
         handleSubmit,
         formState: { errors }
     } = useForm<FormValues>({
-        defaultValues: {
-            username: "Jhon Doe",
-            email: "",
-            channel: "",
+        defaultValues: async () => {
+            const res = await fetch("https://jsonplaceholder.typicode.com/users/1")
+            const data = await res.json()
+
+            return {
+                username: "Jhon Doe",
+                email: data.email,
+                channel: "",
+            }
         }
     })
 
