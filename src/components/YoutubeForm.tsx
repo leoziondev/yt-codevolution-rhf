@@ -12,7 +12,9 @@ type FormValues = {
     phoneNumbers: string[]
     phNumbers: {
         number: string
-    }[]
+    }[],
+    age: number
+    dob: Date
 }
 
 const YoutubehtmlForm = () => {
@@ -31,7 +33,9 @@ const YoutubehtmlForm = () => {
                 facebook: ""
             },
             phoneNumbers: ["", ""],
-            phNumbers: [{ number: '' }]
+            phNumbers: [{ number: '' }],
+            age: 0,
+            dob: new Date()
         }
     })
 
@@ -103,8 +107,8 @@ const YoutubehtmlForm = () => {
                     <label htmlFor="channel" className="block text-sm font-medium leading-6 text-gray-900">Channel</label>
                     <div className="mt-2">
                         <input
-                            type="channel"
-                            id="text"
+                            type="text"
+                            id="channel"
                             {...register("channel", {
                                 required: {
                                     value: true,
@@ -122,7 +126,7 @@ const YoutubehtmlForm = () => {
                         <input
                             type="text"
                             id="twitter"
-                            {...register("social.twitter", {
+                            {...register("social.twitter", {                                
                                 required: {
                                     value: true,
                                     message: "Twitter is required"
@@ -213,6 +217,41 @@ const YoutubehtmlForm = () => {
                     >
                         Add +
                     </button>
+                </div>
+
+                <div>
+                    <label htmlFor="age" className="block text-sm font-medium leading-6 text-gray-900">Age</label>
+                    <div className="mt-2">
+                        <input
+                            type="number"
+                            id="age"
+                            {...register("age", {
+                                valueAsNumber: true,
+                                required: {
+                                    value: true,
+                                    message: "age is required"
+                                }
+                            })}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
+                            <p className="text-red-500 text-sm italic">{errors.age?.message}</p>
+                    </div>
+                </div>
+                <div>
+                    <label htmlFor="dob" className="block text-sm font-medium leading-6 text-gray-900">Date of Birth</label>
+                    <div className="mt-2">
+                        <input
+                            type="date"
+                            id="dob"
+                            {...register("dob", {
+                                valueAsDate: true,
+                                required: {
+                                    value: true,
+                                    message: "Date o birth is required"
+                                }
+                            })}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-2" />
+                            <p className="text-red-500 text-sm italic">{errors.dob?.message}</p>
+                    </div>
                 </div>
 
                 <div>
