@@ -26,7 +26,17 @@ const YoutubehtmlForm = () => {
         watch,
         getValues,
         setValue,
-        formState: { errors, touchedFields, dirtyFields, isDirty, isValid }
+        formState: {
+            errors,
+            touchedFields,
+            dirtyFields,
+            isDirty,
+            isValid,
+            isSubmitting,
+            isSubmitted,
+            isSubmitSuccessful,
+            submitCount
+        }
     } = useForm<FormValues>({
         defaultValues: {
             username: "Jhon Doe",
@@ -44,6 +54,7 @@ const YoutubehtmlForm = () => {
     })
 
     // console.log({ touchedFields, dirtyFields, isDirty, isValid })
+    console.log({ isSubmitting, isSubmitted, isSubmitSuccessful, submitCount })
 
     const { fields, append, remove } = useFieldArray({
         name: 'phNumbers',
@@ -291,7 +302,7 @@ const YoutubehtmlForm = () => {
                     <button
                         type="submit"
                         className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed"
-                        disabled={!isDirty || !isValid}
+                        disabled={!isDirty || !isValid || isSubmitting}
                     >
                         Create
                     </button>
